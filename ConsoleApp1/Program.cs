@@ -7,13 +7,18 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             List<IVehicle> vehicles = new List<IVehicle>();
-            IVehicle[] ParkingGarage = new IVehicle[30];
+            List<IVehicle>[] ParkingGarage = new List<IVehicle>[15];
             
+            for(int i = 0; i < ParkingGarage.Length; i++)
+{
+                ParkingGarage[i] = new List<IVehicle>(); // Initiera varje plats som en tom lista
+            }
+
 
             while (true)
             {
                 Console.Clear();
-                ParkeringsHus.PrintOutParkingGarage(vehicles, ParkingGarage);
+                ParkeringsHus.PrintOutParkingGarage(ParkingGarage);   
 
                 var vehicle = ParkeringsHus.GenerateRandomVehicle(vehicles);
 
@@ -41,7 +46,6 @@ namespace ConsoleApp1
                 }
 
                 
-
                 Console.WriteLine("Tryck på en tangent för att fortsätta.");
                 Console.ReadKey(true);
             }
