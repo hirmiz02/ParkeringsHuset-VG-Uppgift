@@ -10,16 +10,23 @@ namespace ParkeringsHuset
     {
          string regNumber {  get; set; }
          string color { get; set; }
+         public DateTime ParkingTime { get; set; }
 
         void SetRegNumber();
         void SetColor();
+        void SetTime();
 
     }
-    public abstract class Vehicle : IVehicle  //säkerställ att alla subklasser följer interfacets kontrakt
+    public abstract class Vehicle : IVehicle  //Säkerställ att alla subklasser följer interfacets kontrakt
     {
         public string regNumber { get; set; }
         public string color { get; set; }
+        public DateTime ParkingTime { get; set; }   
 
+        public void SetTime()
+        {
+            ParkingTime = DateTime.Now;
+        }
         public void SetRegNumber()
         {
             Random rnd = new Random();
