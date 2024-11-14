@@ -13,6 +13,7 @@ namespace ParkeringsHuset
         {
             SetRegNumber();
             SetColor();
+            SetTime();
 
             Random rnd = new Random();
             string[] makes = { "Honda", "Yamaha", "Kawasaki", "BMW", "Harley", "Ducati", "Norton", "Aprilia" };

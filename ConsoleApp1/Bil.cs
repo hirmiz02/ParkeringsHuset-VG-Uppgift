@@ -14,6 +14,7 @@ namespace ParkeringsHuset
         {
             SetRegNumber(); 
             SetColor();
+            SetTime();
 
             Random rnd = new Random();
             electric = rnd.Next(0, 2) == 1;

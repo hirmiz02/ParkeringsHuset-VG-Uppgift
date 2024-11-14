@@ -13,6 +13,7 @@ namespace ParkeringsHuset
         {
             SetRegNumber();
             SetColor();
+            SetTime();
 
             Random rnd = new Random();
             passengers = rnd.Next(40, 70);
