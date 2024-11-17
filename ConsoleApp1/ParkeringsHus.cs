@@ -91,31 +91,33 @@ namespace ParkeringsHuset
 
             for (int i = 0; i < ParkingGarage.Length; i++)
             {
-                // Kontrollera alla platser för det specifika indexet i parkeringsgaraget
                 for (int j = 0; j < ParkingGarage[i].Count; j++)
                 {
                     if (ParkingGarage[i][j].regNumber == regNumberToRemove)
                     {
-                        // Om det är en buss, ta bort alla platser som fordonet är på
-                        if (ParkingGarage[i][j] is Bus)
-                        {
-                            // Ta bort båda platserna om det är en buss   
-                            ParkingGarage[i].RemoveAt(j);
-                            ParkingGarage[i+1].RemoveAt(j);
+                        // Spara fordonet innan borttagning
+                        var vehicleToRemove = ParkingGarage[i][j];
 
+                        if (vehicleToRemove is Bus && i + 1 < ParkingGarage.Length)
+                        {
+                            // Ta bort både från i och i+1 för bussar
+                            ParkingGarage[i].RemoveAt(j);
+                            ParkingGarage[i + 1].RemoveAt(0);
                         }
                         else
-                        {
+                        {                          
                             ParkingGarage[i].RemoveAt(j);
                         }
+     
+                        double parkingDuration = (DateTime.Now - vehicleToRemove.ParkingTime).TotalMinutes;
+                        double cost = Math.Round(parkingDuration * PricePerMinute, 2);
+                        Console.WriteLine($"Fordon {regNumberToRemove} har checkats ut, Parkeringskostnad: {cost} kr.");
 
                         found = true;
-                        double parkingDuration = (DateTime.Now - ParkingGarage[i][j].ParkingTime).TotalMinutes;
-                        double cost = Math.Round(parkingDuration * PricePerMinute, 2);
-                        Console.WriteLine($"Fordon {regNumberToRemove} har checkats ut, Parkeringskostnad : {cost}");
                         break;
                     }
                 }
+
                 if (found) break;
             }
 
@@ -124,6 +126,7 @@ namespace ParkeringsHuset
                 Console.WriteLine("Fordonet hittades inte.");
             }
         }
+
 
 
 
